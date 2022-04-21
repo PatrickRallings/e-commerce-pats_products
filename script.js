@@ -1,4 +1,10 @@
 //Comments are for personal note-taking/studying
+const homeBtn = document.querySelector('#home')
+const productsBtn = document.querySelector('#products')
+const aboutBtn = document.querySelector('#about')
+const cartBtn = document.querySelector('#cart')
+const cartVal = document.querySelector('#cartVal')
+
 
 fetch("products.json") //fetches the array of objects stored within json file
 .then(function(response){ //passes a function as an argument that takes in the fetch's promise response and assigns it to variable 'response'
@@ -13,13 +19,6 @@ fetch("products.json") //fetches the array of objects stored within json file
 
 let products = JSON.parse(localStorage.getItem("products")); //creates objects (with json format) out of any local storage keys of 'product'
 let cart = JSON.parse(localStorage.getItem("cart")); //same as above but with 'cart'
-
-
-
-
-
-
-
 
 function addItemToCart(productId) { //creating function for addint items to the cart that takes in product's id as a parameter
   let product = products.find(function (item) { 
