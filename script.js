@@ -1,114 +1,137 @@
-const homeBtn = document.querySelector('#home')
-const productsBtn = document.querySelector('#products')
-const aboutBtn = document.querySelector('#about')
-const cartBtn = document.querySelector('.cartBtn')
-const cartVal = document.querySelector('#cartVal')
-const cartDropdown = document.querySelector('.dropdown-menu')
-const allProducts = document.querySelector('#allProducts')
-const womensProducts = document.querySelector('#womensProducts')
-const mensProducts = document.querySelector('#mensProducts')
-const electronicProducts = document.querySelector('#eletronicProducts')
+const homeBtn = document.querySelector("#home");
+const productsBtn = document.querySelector("#products");
+const aboutBtn = document.querySelector("#about");
+const cartBtn = document.querySelector(".cartBtn");
+const cartVal = document.querySelector("#cartVal");
+const cartDropdown = document.querySelector(".dropdown-menu");
+const allProducts = document.querySelector("#allProducts");
+const womensProducts = document.querySelector("#womensProducts");
+const mensProducts = document.querySelector("#mensProducts");
+const electronicProducts = document.querySelector("#electronics");
+const productContainer = document.getElementById("productSection");
+const filterContainer = document.getElementById("filterCont");
+const aboutContainer = document.getElementById("aboutSection");
+const formSend = document.querySelector("#formSend");
 
+const allLinkArray = [homeBtn, productsBtn, aboutBtn, allProducts, womensProducts, mensProducts, electronicProducts]
+const catArray = [allProducts, womensProducts, mensProducts, electronicProducts]
 
 fetch("products.json")
-.then(function(response){
-   return response.json();
-})
-.then(function(data){
-   localStorage.setItem("products", JSON.stringify(data));
-   if(!localStorage.getItem("cart")){
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    localStorage.setItem("products", JSON.stringify(data));
+    if (!localStorage.getItem("cart")) {
       localStorage.setItem("cart", "[]");
-   }
-   if (localStorage.getItem('cart')== '[]') {
-     cartVal.innerHTML = 'Empty'
-     console.log(JSON.parse(localStorage.getItem("cart")).length)
-   } else {
-      cartVal.innerHTML = JSON.parse(localStorage.getItem("cart")).length+' item(s)'
-   }
-});
+    }
+    if (localStorage.getItem("cart") == "[]") {
+      cartVal.innerHTML = "Empty";
+      console.log(JSON.parse(localStorage.getItem("cart")).length);
+    } else {
+      cartVal.innerHTML =
+        JSON.parse(localStorage.getItem("cart")).length + " item(s)";
+    }
+  });
 
 let products = JSON.parse(localStorage.getItem("products"));
 let cart = JSON.parse(localStorage.getItem("cart"));
-let mensClothing = products.filter(element => element.category == "men's clothing")
+let mensClothing = products.filter(
+  (element) => element.category == "men's clothing"
+);
+let womensClothing = products.filter(
+  (element) => element.category == "women's clothing"
+);
+let electronics = products.filter(
+  (element) => element.category == "electronics"
+);
 
-cartBtn.addEventListener('click', function () {
-  cartDropdown.innerHTML = ''
+cartBtn.addEventListener("click", function () {
+  cart = JSON.parse(localStorage.getItem("cart"));
+  cartDropdown.innerHTML = "";
   const count = `<li style="text-align: center; font-size: larger;"><b>${cart.length} item(s)</b></li><hr>
-  <thead>`
-    console.log(cart)
-  cartDropdown.innerHTML = count
-  let totalVal = 0
+  <thead>`;
+  console.log("click-cartOpen");
+  cartDropdown.innerHTML = count;
+  let totalVal = 0;
   cart.forEach((result) => {
-    const cont = 
-    `<tr style="border-top-width: 3px;">
-    <td class="tg-0pky"><img class="img" src="${result.image}" alt="" height="35px"></img></td>
+    const cont = `<tr style="border-top-width: 3px;">
+    <td class="tg-0pky"><img class="img" src="${
+      result.image
+    }" alt="" height="35px"></img></td>
     <td class="tg-0pky">${result.title}</td>
     <td class="tg-0pky">$${result.price.toFixed(2)}</td>
     <td class="tg-0pky"> 1 </td>
-    <td class="tg-0lax"><button class="remove" id="${result.id}">Remove</button></td>
+    <td class="tg-0lax"><button class="remove" id="${
+      result.id
+    }">Remove</button></td>
     </tr>
-    <tr><td colspan="5" style="font-size: 10px;">${result.description}</td></tr>`
+    <tr><td colspan="5" style="font-size: 10px;">${
+      result.description
+    }</td></tr>`;
     cartDropdown.innerHTML += cont;
-    totalVal += result.price
+    totalVal += result.price;
   });
-  const total = 
-  `</thead>
-  <hr><li style="text-align: center; font-size: larger; margin-left: 5px; margin-right: 5px;"><b>Total: $${totalVal.toFixed(2)}</b></li>`
+  const total = `</thead>
+  <hr><li style="text-align: center; font-size: larger; margin-left: 5px; margin-right: 5px;"><b>Total: $${totalVal.toFixed(
+    2
+  )}</b></li>`;
   cartDropdown.innerHTML += total;
-})
+  if (localStorage.getItem("cart") == "[]") {
+    cartVal.innerHTML = "Empty";
+    console.log(JSON.parse(localStorage.getItem("cart")).length);
+  } else {
+    cartVal.innerHTML =
+      JSON.parse(localStorage.getItem("cart")).length + " item(s)";
+  }
+});
 
-function addItemToCart(productId){
-  let product = products.find(function(item){
-     return item.id == productId;
+function addItemToCart(productId) {
+  let product = products.find(function (item) {
+    return item.id == productId;
   });
 
-  if(cart.length == 0){
-     cart.push(product);
-  }else{
-     let res = cart.find(element => element.id == productId);
-     if(res === undefined){
-        cart.push(product);
-     } else {
-       return alert('Item is already in cart.')
-     }
+  if (cart.length == 0) {
+    cart.push(product);
+  } else {
+    let res = cart.find((element) => element.id == productId);
+    if (res === undefined) {
+      cart.push(product);
+    } else {
+      return alert("Item is already in cart.");
+    }
   }
   localStorage.setItem("cart", JSON.stringify(cart));
-  if (localStorage.getItem('cart')== '[]') {
-    cartVal.innerHTML = 'Empty'
-    console.log(JSON.parse(localStorage.getItem("cart")).length)
+  if (localStorage.getItem("cart") == "[]") {
+    cartVal.innerHTML = "Empty";
+    console.log(JSON.parse(localStorage.getItem("cart")).length);
   } else {
-     cartVal.innerHTML = JSON.parse(localStorage.getItem("cart")).length+' item(s)'
+    cartVal.innerHTML =
+      JSON.parse(localStorage.getItem("cart")).length + " item(s)";
   }
 }
 
-function removeItemFromCart(productId){
-    let tempCart = cart.filter(item => item.id != productId);
-    localStorage.setItem("cart", JSON.stringify(tempCart));
- }
- console.log(cart)
+function removeItemFromCart(productId) {
+  let tempCart = cart.filter((item) => item.id != productId);
+  localStorage.setItem("cart", JSON.stringify(tempCart));
+  cartBtn.click();
+}
+console.log(cart);
 
-
- document.querySelectorAll('table').forEach(item => {
-  item.addEventListener('click', event => {
-    removeItemFromCart(event.target.id)
-    console.log(event.target.id)
-    console.log('testing #2')
-    location.reload()
-  })
-})
-
-
-const container = document.getElementById('productSection');
+document.querySelectorAll("table").forEach((item) => {
+  item.addEventListener("click", (event) => {
+    removeItemFromCart(event.target.id);
+  });
+});
 
 const listProducts = (productsParam) => {
-container.innerHTML = ''
+  productContainer.innerHTML = "";
 
-productsParam.forEach((result) => {
+  productsParam.forEach((result) => {
+    const card = document.createElement("div");
+    card.classList = "card-body";
 
-  const card = document.createElement("div");
-  card.classList = "card-body";
-
-  const content = `
+    const content = `
     <div class="card">
     <div class="row">
       <div class="el-wrapper">
@@ -120,9 +143,11 @@ productsParam.forEach((result) => {
               <span class="p-company">${result.rating.rate} / 5</span>
             </div>
             <div class="a-size">
-            <span class='description' style="font-size: smaller;">${result.description}</span>
+            <span class='description' style="font-size: smaller;">${
+              result.description
+            }</span>
             <hr />
-            <span class="size">Price: $${(result.price).toFixed(2)}</span>
+            <span class="size">Price: $${result.price.toFixed(2)}</span>
             </div>
           </div>
         </div>
@@ -133,7 +158,9 @@ productsParam.forEach((result) => {
           </div>
 
           <a class="cart" id="${result.id}" href="#">
-            <span class="price" id="${result.id}">$${(result.price).toFixed(2)}</span>
+            <span class="price" id="${result.id}">$${result.price.toFixed(
+      2
+    )}</span>
             <span class="add-to-cart" id="${result.id}">
               <span class="txt" id="${result.id}">Add to cart</span>
             </span>
@@ -143,24 +170,160 @@ productsParam.forEach((result) => {
     </div>
   </div>
   `;
-  container.innerHTML += content;
+    productContainer.innerHTML += content;
+  });
+  document.querySelectorAll(".cart").forEach((item) => {
+    item.addEventListener("click", (event) => {
+      let itemID = parseInt(event.target.id);
+      console.log("cart clicked");
+      addItemToCart(itemID);
+    });
+  });
+};
+
+const removeBottomBorder = ([...args]) => {
+  [...args].forEach((element) => {
+    element.style.borderBottom = "";
+  });
+};
+
+const addBottomBorder = ([...args]) => {
+  [...args].forEach((element) => {
+    element.style.borderBottom = "2px solid aliceblue";
+  });
+};
+
+allProducts.addEventListener("click", function () {
+  console.log("clicked-allProducts");
+  removeBottomBorder(catArray)
+  addBottomBorder([allProducts])
+  listProducts(products);
 });
-}
 
-document.querySelectorAll('.cart').forEach(item => {
-  item.addEventListener('click', event => {
-    let itemID = parseInt(event.target.id)
-    addItemToCart(itemID)
-  })
-})
+womensProducts.addEventListener("click", function () {
+  console.log("clicked-allProducts");
+  removeBottomBorder(catArray)
+  addBottomBorder([womensProducts])
+  listProducts(womensClothing);
+});
 
-productsBtn.addEventListener('click', function () {
-  console.log('click-productsBtn')
-  productsBtn.style.borderBottom = "2px solid #48608c"
-  listProducts(products)
-})
+electronicProducts.addEventListener("click", function () {
+  console.log("clicked-allProducts");
+  removeBottomBorder(catArray)
+  addBottomBorder([electronicProducts])
+  listProducts(electronics);
+});
 
-allProducts.addEventListener('click', function () {
-  console.log('clicked-allProducts')
-  allProducts.style.borderBottom = "1px solid aliceblue"
-})
+mensProducts.addEventListener("click", function () {
+  console.log("clicked-allProducts");
+  removeBottomBorder(catArray)
+  addBottomBorder([mensProducts])
+  listProducts(mensClothing);
+});
+
+formSend.addEventListener("click", function () {
+  return alert('Thank you for your feedback!')
+});
+
+homeBtn.addEventListener("click", function () {
+  removeBottomBorder(allLinkArray)
+  console.log("click-homeBtn");
+  addBottomBorder([homeBtn])
+  filterContainer.innerHTML = ''
+  productContainer.innerHTML = ''
+  aboutContainer.innerHTML = ''
+});
+
+productsBtn.addEventListener("click", function () {
+  console.log("click-productsBtn");
+  removeBottomBorder(allLinkArray)
+  addBottomBorder([productsBtn, allProducts])
+  listProducts(products);
+  aboutContainer.innerHTML = ''
+  filterContainer.innerHTML = `                <div class="row justify-content-center">
+  <div class="col-6">
+      <div id="collapseOne" class="row accordion-collapse text-center collapse"
+          aria-labelledby="headingOne">
+          <div class="col-3 mt-2"><span class="categories" id="allProducts">All Products</span></div>
+          <div class="col-3 mt-2"><span class="categories" id="womensProducts">Women's Clothing</span></div>
+          <div class="col-3 mt-2"><span class="categories" id="mensProducts">Men's Clothing</span></div>
+          <div class="col-3 mt-2"><span class="categories" id="electronics">Electronics</span></div>
+      </div>
+
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-6 text-center accordian" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+      aria-expanded="false" aria-controls="collapseOne" id="filter"><img class="categories" id="arrow"
+          data-bs-toggle="collapse accordian-button" aria-expanded="false"
+          aria-controls="multiCollapseExample1" src="images/arrowBlue.png" alt="arrow" height="21px">
+  </div>
+
+</div>`
+});
+
+aboutBtn.addEventListener("click", function () {
+  console.log("click-productsBtn");
+  removeBottomBorder(allLinkArray)
+  addBottomBorder([aboutBtn])
+  listProducts(products);
+  filterContainer.innerHTML = ''
+  productContainer.innerHTML = ''
+  aboutContainer.innerHTML = `                    <div class="row justify-content-center">
+  <div class="col-6 aboutCont">
+      <h1 style="font-size: 100px;">About Us</h1>
+      <hr style="margin: 25px;">
+      <h4>Here at Pat's Products our mission is to provide a stress free shopping experience for all of our clients. We accomplish this by curating a short list of twenty products in a variety of categories. By doing this we take away any stress or pressure that consumers normally have when being presented with endless options. We also make it a goal to make every customer's feedback a part of our culture.</h4>
+      <hr style="margin: 25px;">
+      <h4>Thank and you being interested in Pat's Products, please leave any of your valuable feedback below and come back and see us!</h4>
+  </div>
+</div>
+<div class="row justify-content-center">
+<div class="container">
+<div class="screen">
+<div class="screen-header">
+<div class="screen-header-left">
+<div class="screen-header-button close"></div>
+<div class="screen-header-button maximize"></div>
+<div class="screen-header-button minimize"></div>
+</div>
+<div class="screen-header-right">
+<div class="screen-header-ellipsis"></div>
+<div class="screen-header-ellipsis"></div>
+<div class="screen-header-ellipsis"></div>
+</div>
+</div>
+<div class="screen-body">
+<div class="screen-body-item left">
+<div class="app-title">
+<span>CONTACT</span>
+<span>US</span>
+</div>
+<div class="app-contact">CONTACT INFO : (704) 796-6270</div>
+</div>
+<div class="screen-body-item">
+<div class="app-form">
+<div class="app-form-group">
+<input class="app-form-control" placeholder="NAME" >
+</div>
+<div class="app-form-group">
+<input class="app-form-control" placeholder="EMAIL">
+</div>
+<div class="app-form-group">
+<input class="app-form-control" placeholder="CONTACT #">
+</div>
+<div class="app-form-group message">
+<input class="app-form-control" placeholder="MESSAGE">
+</div>
+<div class="app-form-group buttons">
+<button class="app-form-button">CANCEL</button>
+<button class="app-form-button" id="formSend">SEND</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>`
+});
