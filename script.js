@@ -1,4 +1,3 @@
-const homeBtn = document.querySelector("#home");
 const productsBtn = document.querySelector("#products");
 const aboutBtn = document.querySelector("#about");
 const cartBtn = document.querySelector(".cartBtn");
@@ -16,7 +15,7 @@ const navContainer = document.getElementById('navCont')
 const formSend = document.querySelector("#formSend");
 const enterBtn = document.querySelector('#enterBtn')
 
-const allLinkArray = [homeBtn, productsBtn, aboutBtn, allProducts, womensProducts, mensProducts, electronicProducts]
+const allLinkArray = [productsBtn, aboutBtn, allProducts, womensProducts, mensProducts, electronicProducts]
 const catArray = [allProducts, womensProducts, mensProducts, electronicProducts]
 
 fetch("products.json")
@@ -268,13 +267,4 @@ mensProducts.addEventListener("click", function () {
 
 formSend.addEventListener("click", function () {
   return alert('Thank you for your feedback!')
-});
-
-homeBtn.addEventListener("click", function () {
-  removeBottomBorder(allLinkArray)
-  console.log("click-homeBtn");
-  addBottomBorder([homeBtn])
-  filterContainer.style.display = 'none'
-  productContainer.style.display = 'none'
-  aboutContainer.style.display = 'none'
 });
