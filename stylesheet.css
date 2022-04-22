@@ -20,7 +20,7 @@ body {
   display: flex;
   flex-direction: row;
   margin-top: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 200px;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
@@ -34,6 +34,7 @@ body {
 footer {
   display: flex;
   justify-content: space-between;
+  position: absolute;
   bottom: 0%;
   width: 100%;
   height: 75px;
@@ -51,6 +52,10 @@ footer {
 
 #spanFoot {
   margin-left: 40%;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
 }
 
 .card {
@@ -114,6 +119,10 @@ h6 {
   border-radius: 25px; */
   color: rgb(40, 40, 56);
   text-align: center;
+}
+
+#aboutSection {
+  margin-bottom: 100px;
 }
 
 .links {
