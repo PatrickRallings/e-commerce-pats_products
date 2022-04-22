@@ -4,6 +4,10 @@ const aboutBtn = document.querySelector('#about')
 const cartBtn = document.querySelector('.cartBtn')
 const cartVal = document.querySelector('#cartVal')
 const cartDropdown = document.querySelector('.dropdown-menu')
+const allProducts = document.querySelector('#allProducts')
+const womensProducts = document.querySelector('#womensProducts')
+const mensProducts = document.querySelector('#mensProducts')
+const electronicProducts = document.querySelector('#eletronicProducts')
 
 
 fetch("products.json")
@@ -25,6 +29,7 @@ fetch("products.json")
 
 let products = JSON.parse(localStorage.getItem("products"));
 let cart = JSON.parse(localStorage.getItem("cart"));
+let mensClothing = products.filter(element => element.category == "men's clothing")
 
 cartBtn.addEventListener('click', function () {
   cartDropdown.innerHTML = ''
@@ -95,13 +100,14 @@ function removeItemFromCart(productId){
 
 const container = document.getElementById('productSection');
 
-products.forEach((result) => {
+const listProducts = (productsParam) => {
+container.innerHTML = ''
+
+productsParam.forEach((result) => {
 
   const card = document.createElement("div");
   card.classList = "card-body";
 
-
-  // Construct card content
   const content = `
     <div class="card">
     <div class="row">
@@ -139,6 +145,7 @@ products.forEach((result) => {
   `;
   container.innerHTML += content;
 });
+}
 
 document.querySelectorAll('.cart').forEach(item => {
   item.addEventListener('click', event => {
@@ -147,3 +154,13 @@ document.querySelectorAll('.cart').forEach(item => {
   })
 })
 
+productsBtn.addEventListener('click', function () {
+  console.log('click-productsBtn')
+  productsBtn.style.borderBottom = "2px solid #48608c"
+  listProducts(products)
+})
+
+allProducts.addEventListener('click', function () {
+  console.log('clicked-allProducts')
+  allProducts.style.borderBottom = "1px solid aliceblue"
+})

@@ -63,13 +63,32 @@ footer {
   color: #252525;
 }
 
-#home {
-  border-bottom: 2px solid #48608c;
-}
-
 .linkList {
   padding-left: 18%;
   margin-top: 10px;
+}
+
+.categories {
+  margin-top: 8px;
+  cursor: pointer;
+  color: aliceblue;
+}
+
+#collapseOne {
+  color: aliceblue;
+  background-color: rgb(77, 77, 89);
+}
+
+#filter {
+  background-color: rgb(77, 77, 89);
+  color: aliceblue;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;
+  padding-bottom: 3px;
+}
+
+h6 {
+  margin: 3px 0px 0px 0px;
 }
 
 #cartVal {
@@ -92,6 +111,7 @@ footer {
 .links:hover {
   cursor: pointer;
 }
+
 
 .el-wrapper {
   width: 290px;
