@@ -324,3 +324,15 @@ button {
 button:active:hover {
   background-color: green;
 }
+
+@media only screen and (max-width: 600px) {
+  .companyName {
+    height: 20px;
+  }
+  .hidden {
+    display: none;
+  }
+  .links {
+    transform: scale(.5);
+  }
+}
