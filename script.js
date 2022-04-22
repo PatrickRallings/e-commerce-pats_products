@@ -101,7 +101,7 @@ function addItemToCart(productId) {
     if (res === undefined) {
       cart.push(product);
     } else {
-      return alert("Item is already in cart.");
+      return alert("Pat's Products allows the purchase of one item per customer to create a calm and stress-free experience.");
     }
   }
   localStorage.setItem("cart", JSON.stringify(cart));
