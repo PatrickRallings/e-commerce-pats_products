@@ -15,25 +15,39 @@ fetch("products.json") //fetches the array of objects stored within json file
    if(!localStorage.getItem("cart")){ //checking if there is already a cart key in local storage
       localStorage.setItem("cart", "[]"); //if localStorage.getItem('cart') is not truthy, we create a key of cart with an empty array within local storage
    }
+   if (localStorage.getItem('cart')== '[]') {
+     cartVal.innerHTML = 'Empty'
+     console.log(JSON.parse(localStorage.getItem("cart")).length)
+   } else {
+      cartVal.innerHTML = JSON.parse(localStorage.getItem("cart")).length+' item(s)'
+   }
 });
 
 let products = JSON.parse(localStorage.getItem("products")); //creates objects (with json format) out of any local storage keys of 'product'
 let cart = JSON.parse(localStorage.getItem("cart")); //same as above but with 'cart'
+console.log(products)
 
-function addItemToCart(productId) { //creating function for addint items to the cart that takes in product's id as a parameter
-  let product = products.find(function (item) { 
-    return item.id == productId; //creates a variable product that assigns a value of what product within the products object has the same id as the parent function's given argument
+function addItemToCart(productId){
+  let product = products.find(function(item){
+     return item.id == productId;
   });
 
-  if (cart.length == 0) {
-    cart.push(product); //if the cart is empty we just push the new product
-  } else {
-    let res = cart.find((element) => element.id == productId); //if the cart isn't empty we check and see if the item already exists in the cart
-    if (res === undefined) {
-      cart.push(product); //we the search comes back undefined (product is not already in the cart) we then push the product into the cart
-    }
+  if(cart.length == 0){
+     cart.push(product);
+  }else{
+     let res = cart.find(element => element.id == productId);
+     if(res === undefined){
+        cart.push(product);
+     }
   }
   localStorage.setItem("cart", JSON.stringify(cart)); //we update the local storage's cart key to include our new object
+  if (localStorage.getItem('cart')== '[]') {
+    cartVal.innerHTML = 'Empty'
+    console.log(JSON.parse(localStorage.getItem("cart")).length)
+  } else {
+     cartVal.innerHTML = JSON.parse(localStorage.getItem("cart")).length+'item(s)'
+  }
+  console.log('cart is '+localStorage.getItem('cart'))
 }
 
 function removeItemFromCart(productId){
@@ -43,12 +57,11 @@ function removeItemFromCart(productId){
 
  const container = document.getElementById('productSection');
 
-products.forEach((result, idx) => {
+products.forEach((result) => {
   // Create card element
   const card = document.createElement("div");
   card.classList = "card-body";
 
-  console.log(idx);
 
   // Construct card content
   const content = `
@@ -75,10 +88,10 @@ products.forEach((result, idx) => {
             <div class="h-bg-inner"></div>
           </div>
 
-          <a class="cart" href="#">
-            <span class="price">$${(result.price).toFixed(2)}</span>
-            <span class="add-to-cart">
-              <span class="txt">Add in cart</span>
+          <a class="cart" id="${result.id}" href="#">
+            <span class="price" id="${result.id}">$${(result.price).toFixed(2)}</span>
+            <span class="add-to-cart" id="${result.id}">
+              <span class="txt" id="${result.id}">Add to cart</span>
             </span>
           </a>
         </div>
@@ -90,3 +103,10 @@ products.forEach((result, idx) => {
   // Append newyly created card element to the container
   container.innerHTML += content;
 });
+
+document.querySelectorAll('.cart').forEach(item => {
+  item.addEventListener('click', event => {
+    let itemID = parseInt(event.target.id)-1
+    addItemToCart(itemID)
+  })
+})
