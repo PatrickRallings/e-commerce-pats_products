@@ -193,6 +193,27 @@ const addBottomBorder = ([...args]) => {
   });
 };
 
+productsBtn.addEventListener("click", function () {
+  console.log("click-productsBtn");
+  listProducts(products);
+  removeBottomBorder(allLinkArray)
+  addBottomBorder([productsBtn, allProducts])
+  aboutContainer.style.display = 'none'
+  filterContainer.style.display = 'block'
+  productContainer.style.display = 'flex'
+
+});
+
+aboutBtn.addEventListener("click", function () {
+  console.log("click-productsBtn");
+  removeBottomBorder(allLinkArray)
+  addBottomBorder([aboutBtn])
+  listProducts(products);
+  filterContainer.style.display = 'none'
+  productContainer.style.display = 'none'
+  aboutContainer.style.display = 'block'
+});
+
 allProducts.addEventListener("click", function () {
   console.log("clicked-allProducts");
   removeBottomBorder(catArray)
@@ -232,98 +253,4 @@ homeBtn.addEventListener("click", function () {
   filterContainer.innerHTML = ''
   productContainer.innerHTML = ''
   aboutContainer.innerHTML = ''
-});
-
-productsBtn.addEventListener("click", function () {
-  console.log("click-productsBtn");
-  removeBottomBorder(allLinkArray)
-  addBottomBorder([productsBtn, allProducts])
-  listProducts(products);
-  aboutContainer.innerHTML = ''
-  filterContainer.innerHTML = `                <div class="row justify-content-center">
-  <div class="col-6">
-      <div id="collapseOne" class="row accordion-collapse text-center collapse"
-          aria-labelledby="headingOne">
-          <div class="col-3 mt-2"><span class="categories" id="allProducts">All Products</span></div>
-          <div class="col-3 mt-2"><span class="categories" id="womensProducts">Women's Clothing</span></div>
-          <div class="col-3 mt-2"><span class="categories" id="mensProducts">Men's Clothing</span></div>
-          <div class="col-3 mt-2"><span class="categories" id="electronics">Electronics</span></div>
-      </div>
-
-  </div>
-</div>
-<div class="row justify-content-center">
-  <div class="col-6 text-center accordian" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-      aria-expanded="false" aria-controls="collapseOne" id="filter"><img class="categories" id="arrow"
-          data-bs-toggle="collapse accordian-button" aria-expanded="false"
-          aria-controls="multiCollapseExample1" src="images/arrowBlue.png" alt="arrow" height="21px">
-  </div>
-
-</div>`
-});
-
-aboutBtn.addEventListener("click", function () {
-  console.log("click-productsBtn");
-  removeBottomBorder(allLinkArray)
-  addBottomBorder([aboutBtn])
-  listProducts(products);
-  filterContainer.innerHTML = ''
-  productContainer.innerHTML = ''
-  aboutContainer.innerHTML = `                    <div class="row justify-content-center">
-  <div class="col-6 aboutCont">
-      <h1 style="font-size: 100px;">About Us</h1>
-      <hr style="margin: 25px;">
-      <h4>Here at Pat's Products our mission is to provide a stress free shopping experience for all of our clients. We accomplish this by curating a short list of twenty products in a variety of categories. By doing this we take away any stress or pressure that consumers normally have when being presented with endless options. We also make it a goal to make every customer's feedback a part of our culture.</h4>
-      <hr style="margin: 25px;">
-      <h4>Thank and you being interested in Pat's Products, please leave any of your valuable feedback below and come back and see us!</h4>
-  </div>
-</div>
-<div class="row justify-content-center">
-<div class="container">
-<div class="screen">
-<div class="screen-header">
-<div class="screen-header-left">
-<div class="screen-header-button close"></div>
-<div class="screen-header-button maximize"></div>
-<div class="screen-header-button minimize"></div>
-</div>
-<div class="screen-header-right">
-<div class="screen-header-ellipsis"></div>
-<div class="screen-header-ellipsis"></div>
-<div class="screen-header-ellipsis"></div>
-</div>
-</div>
-<div class="screen-body">
-<div class="screen-body-item left">
-<div class="app-title">
-<span>CONTACT</span>
-<span>US</span>
-</div>
-<div class="app-contact">CONTACT INFO : (704) 796-6270</div>
-</div>
-<div class="screen-body-item">
-<div class="app-form">
-<div class="app-form-group">
-<input class="app-form-control" placeholder="NAME" >
-</div>
-<div class="app-form-group">
-<input class="app-form-control" placeholder="EMAIL">
-</div>
-<div class="app-form-group">
-<input class="app-form-control" placeholder="CONTACT #">
-</div>
-<div class="app-form-group message">
-<input class="app-form-control" placeholder="MESSAGE">
-</div>
-<div class="app-form-group buttons">
-<button class="app-form-button">CANCEL</button>
-<button class="app-form-button" id="formSend">SEND</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>`
 });
