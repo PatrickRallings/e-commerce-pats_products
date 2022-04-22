@@ -1,19 +1,19 @@
-//Comments are for personal note-taking/studying
 const homeBtn = document.querySelector('#home')
 const productsBtn = document.querySelector('#products')
 const aboutBtn = document.querySelector('#about')
-const cartBtn = document.querySelector('#cart')
+const cartBtn = document.querySelector('.cartBtn')
 const cartVal = document.querySelector('#cartVal')
+const cartDropdown = document.querySelector('.dropdown-menu')
 
 
-fetch("products.json") //fetches the array of objects stored within json file
-.then(function(response){ //passes a function as an argument that takes in the fetch's promise response and assigns it to variable 'response'
-   return response.json(); //parses the response into a json format (using json() method) and returns it
+fetch("products.json")
+.then(function(response){
+   return response.json();
 })
-.then(function(data){ //bc then method also uses responses, we take in the output once again, naming the variable 'data' this time)
-   localStorage.setItem("products", JSON.stringify(data)); //calling localStorage object and using setItem method (which takes argument pairs of key, value) and then stringifying it bc local storage only takes strings
-   if(!localStorage.getItem("cart")){ //checking if there is already a cart key in local storage
-      localStorage.setItem("cart", "[]"); //if localStorage.getItem('cart') is not truthy, we create a key of cart with an empty array within local storage
+.then(function(data){
+   localStorage.setItem("products", JSON.stringify(data));
+   if(!localStorage.getItem("cart")){
+      localStorage.setItem("cart", "[]");
    }
    if (localStorage.getItem('cart')== '[]') {
      cartVal.innerHTML = 'Empty'
@@ -23,9 +23,34 @@ fetch("products.json") //fetches the array of objects stored within json file
    }
 });
 
-let products = JSON.parse(localStorage.getItem("products")); //creates objects (with json format) out of any local storage keys of 'product'
-let cart = JSON.parse(localStorage.getItem("cart")); //same as above but with 'cart'
-console.log(products)
+let products = JSON.parse(localStorage.getItem("products"));
+let cart = JSON.parse(localStorage.getItem("cart"));
+
+cartBtn.addEventListener('click', function () {
+  cartDropdown.innerHTML = ''
+  const count = `<li style="text-align: center; font-size: larger;"><b>${cart.length} item(s)</b></li><hr>
+  <thead>`
+    console.log(cart)
+  cartDropdown.innerHTML = count
+  let totalVal = 0
+  cart.forEach((result) => {
+    const cont = 
+    `<tr style="border-top-width: 3px;">
+    <td class="tg-0pky"><img class="img" src="${result.image}" alt="" height="35px"></img></td>
+    <td class="tg-0pky">${result.title}</td>
+    <td class="tg-0pky">$${result.price.toFixed(2)}</td>
+    <td class="tg-0pky"> 1 </td>
+    <td class="tg-0lax"><button class="remove" id="${result.id}">Remove</button></td>
+    </tr>
+    <tr><td colspan="5" style="font-size: 10px;">${result.description}</td></tr>`
+    cartDropdown.innerHTML += cont;
+    totalVal += result.price
+  });
+  const total = 
+  `</thead>
+  <hr><li style="text-align: center; font-size: larger; margin-left: 5px; margin-right: 5px;"><b>Total: $${totalVal.toFixed(2)}</b></li>`
+  cartDropdown.innerHTML += total;
+})
 
 function addItemToCart(productId){
   let product = products.find(function(item){
@@ -38,27 +63,41 @@ function addItemToCart(productId){
      let res = cart.find(element => element.id == productId);
      if(res === undefined){
         cart.push(product);
+     } else {
+       return alert('Item is already in cart.')
      }
   }
-  localStorage.setItem("cart", JSON.stringify(cart)); //we update the local storage's cart key to include our new object
+  localStorage.setItem("cart", JSON.stringify(cart));
   if (localStorage.getItem('cart')== '[]') {
     cartVal.innerHTML = 'Empty'
     console.log(JSON.parse(localStorage.getItem("cart")).length)
   } else {
-     cartVal.innerHTML = JSON.parse(localStorage.getItem("cart")).length+'item(s)'
+     cartVal.innerHTML = JSON.parse(localStorage.getItem("cart")).length+' item(s)'
   }
-  console.log('cart is '+localStorage.getItem('cart'))
 }
 
 function removeItemFromCart(productId){
-    let tempCart = cart.filter(item => item.id != productId); //searches for product within cart and crates copy of cart without that item (from product id given in function parameter)
-    localStorage.setItem("cart", JSON.stringify(tempCart)); //sets the local storage cart key to equal of copied cart (that has the item removed)
+    let tempCart = cart.filter(item => item.id != productId);
+    localStorage.setItem("cart", JSON.stringify(tempCart));
  }
+ console.log(cart)
 
- const container = document.getElementById('productSection');
+
+ document.querySelectorAll('table').forEach(item => {
+  item.addEventListener('click', event => {
+    let itemID = parseInt()
+    removeItemFromCart(event.target.id)
+    console.log(event.target.id)
+    console.log('testing #2')
+    location.reload()
+  })
+})
+
+
+const container = document.getElementById('productSection');
 
 products.forEach((result) => {
-  // Create card element
+
   const card = document.createElement("div");
   card.classList = "card-body";
 
@@ -99,14 +138,13 @@ products.forEach((result) => {
     </div>
   </div>
   `;
-
-  // Append newyly created card element to the container
   container.innerHTML += content;
 });
 
 document.querySelectorAll('.cart').forEach(item => {
   item.addEventListener('click', event => {
-    let itemID = parseInt(event.target.id)-1
+    let itemID = parseInt(event.target.id)
     addItemToCart(itemID)
   })
 })
+
