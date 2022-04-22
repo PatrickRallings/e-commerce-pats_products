@@ -11,7 +11,10 @@ const electronicProducts = document.querySelector("#electronics");
 const productContainer = document.getElementById("productSection");
 const filterContainer = document.getElementById("filterCont");
 const aboutContainer = document.getElementById("aboutSection");
+const welcomeContainer = document.getElementById("welcomeSection");
+const navContainer = document.getElementById('navCont')
 const formSend = document.querySelector("#formSend");
+const enterBtn = document.querySelector('#enterBtn')
 
 const allLinkArray = [homeBtn, productsBtn, aboutBtn, allProducts, womensProducts, mensProducts, electronicProducts]
 const catArray = [allProducts, womensProducts, mensProducts, electronicProducts]
@@ -193,6 +196,27 @@ const addBottomBorder = ([...args]) => {
   });
 };
 
+function welcomeLayout () {
+  aboutContainer.style.display = 'none'
+  welcomeContainer.style.display = 'block'
+  productContainer.style.display = 'none'
+  filterContainer.style.display = 'none'
+  navContainer.style.display = 'none'
+}
+
+welcomeLayout()
+
+enterBtn.addEventListener('click', function () {
+  navContainer.style.display = 'flex'
+  listProducts(products);
+  removeBottomBorder(allLinkArray)
+  addBottomBorder([productsBtn, allProducts])
+  aboutContainer.style.display = 'none'
+  filterContainer.style.display = 'block'
+  productContainer.style.display = 'flex'
+  welcomeContainer.style.display = 'none'
+})
+
 productsBtn.addEventListener("click", function () {
   console.log("click-productsBtn");
   listProducts(products);
@@ -250,7 +274,7 @@ homeBtn.addEventListener("click", function () {
   removeBottomBorder(allLinkArray)
   console.log("click-homeBtn");
   addBottomBorder([homeBtn])
-  filterContainer.innerHTML = ''
-  productContainer.innerHTML = ''
-  aboutContainer.innerHTML = ''
+  filterContainer.style.display = 'none'
+  productContainer.style.display = 'none'
+  aboutContainer.style.display = 'none'
 });

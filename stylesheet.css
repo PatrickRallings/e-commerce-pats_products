@@ -12,6 +12,10 @@ body {
   border-bottom: 3px solid rgb(255, 255, 255);
 }
 
+#welcomeSection {
+  height: 500px;
+}
+
 #productSection {
   display: flex;
   flex-direction: row;
@@ -87,7 +91,6 @@ footer {
   border-bottom-left-radius: 38px;
   border-bottom-right-radius: 38px;
   padding-bottom: 3px;
-  display: ;
 }
 
 h6 {
@@ -576,4 +579,14 @@ button:active:hover {
   .screen-body-item {
     padding: 0;
   }
+}
+
+
+
+#welcomeSection {
+  background-color: rgb(40, 40, 56);
+}
+
+#enterBtn:active:hover {
+  background-color: black;
 }
