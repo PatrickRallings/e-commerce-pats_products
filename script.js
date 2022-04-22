@@ -207,13 +207,13 @@ welcomeLayout()
 
 enterBtn.addEventListener('click', function () {
   navContainer.style.display = 'flex'
-  listProducts(products);
-  removeBottomBorder(allLinkArray)
-  addBottomBorder([productsBtn, allProducts])
   aboutContainer.style.display = 'none'
   filterContainer.style.display = 'block'
   productContainer.style.display = 'flex'
   welcomeContainer.style.display = 'none'
+  listProducts(products);
+  removeBottomBorder(allLinkArray)
+  addBottomBorder([productsBtn, allProducts])
 })
 
 productsBtn.addEventListener("click", function () {
