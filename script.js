@@ -85,7 +85,6 @@ function removeItemFromCart(productId){
 
  document.querySelectorAll('table').forEach(item => {
   item.addEventListener('click', event => {
-    let itemID = parseInt()
     removeItemFromCart(event.target.id)
     console.log(event.target.id)
     console.log('testing #2')
