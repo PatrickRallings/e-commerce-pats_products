@@ -4,19 +4,13 @@ const cartBtn = document.querySelector(".cartBtn");
 const cartVal = document.querySelector("#cartVal");
 const cartDropdown = document.querySelector(".dropdown-menu");
 const allProducts = document.querySelector("#allProducts");
-const womensProducts = document.querySelector("#womensProducts");
-const mensProducts = document.querySelector("#mensProducts");
+const wProducts = document.querySelector("#womensProducts");
+const mProducts = document.querySelector("#mensProducts");
 const electronicProducts = document.querySelector("#electronics");
 const productContainer = document.getElementById("productSection");
-const filterContainer = document.getElementById("filterCont");
-const aboutContainer = document.getElementById("aboutSection");
-const welcomeContainer = document.getElementById("welcomeSection");
-const navContainer = document.getElementById('navCont')
-const formSend = document.querySelector("#formSend");
-const enterBtn = document.querySelector('#enterBtn')
 
-const allLinkArray = [productsBtn, aboutBtn, allProducts, womensProducts, mensProducts, electronicProducts]
-const catArray = [allProducts, womensProducts, mensProducts, electronicProducts]
+const allLinkArray = [productsBtn, aboutBtn, allProducts, wProducts, mProducts, electronicProducts]
+const catArray = [allProducts, wProducts, mProducts, electronicProducts]
 
 fetch("products.json")
   .then(function (response) {
@@ -27,7 +21,7 @@ fetch("products.json")
     if (!localStorage.getItem("cart")) {
       localStorage.setItem("cart", "[]");
     }
-    if (localStorage.getItem("cart") == "[]") {
+    if (localStorage.getItem("cart") === "[]") {
       cartVal.innerHTML = "Empty";
       console.log(JSON.parse(localStorage.getItem("cart")).length);
     } else {
@@ -39,10 +33,10 @@ fetch("products.json")
 let products = JSON.parse(localStorage.getItem("products"));
 let cart = JSON.parse(localStorage.getItem("cart"));
 let mensClothing = products.filter(
-  (element) => element.category == "men's clothing"
+  (element) => element.category === "men's clothing"
 );
 let womensClothing = products.filter(
-  (element) => element.category == "women's clothing"
+  (element) => element.category === "women's clothing"
 );
 let electronics = products.filter(
   (element) => element.category == "electronics"
@@ -182,6 +176,7 @@ const listProducts = (productsParam) => {
     });
   });
 };
+listProducts(products)
 
 const removeBottomBorder = ([...args]) => {
   [...args].forEach((element) => {
@@ -195,36 +190,11 @@ const addBottomBorder = ([...args]) => {
   });
 };
 
-function welcomeLayout () {
-  aboutContainer.style.display = 'none'
-  welcomeContainer.style.display = 'block'
-  productContainer.style.display = 'none'
-  filterContainer.style.display = 'none'
-  navContainer.style.display = 'none'
-}
-
-welcomeLayout()
-
-enterBtn.addEventListener('click', function () {
-  navContainer.style.display = 'flex'
-  aboutContainer.style.display = 'none'
-  filterContainer.style.display = 'block'
-  productContainer.style.display = 'flex'
-  welcomeContainer.style.display = 'none'
-  listProducts(products);
-  removeBottomBorder(allLinkArray)
-  addBottomBorder([productsBtn, allProducts])
-})
-
 productsBtn.addEventListener("click", function () {
   console.log("click-productsBtn");
   listProducts(products);
   removeBottomBorder(allLinkArray)
   addBottomBorder([productsBtn, allProducts])
-  aboutContainer.style.display = 'none'
-  filterContainer.style.display = 'block'
-  productContainer.style.display = 'flex'
-
 });
 
 aboutBtn.addEventListener("click", function () {
@@ -232,9 +202,6 @@ aboutBtn.addEventListener("click", function () {
   removeBottomBorder(allLinkArray)
   addBottomBorder([aboutBtn])
   listProducts(products);
-  filterContainer.style.display = 'none'
-  productContainer.style.display = 'none'
-  aboutContainer.style.display = 'block'
 });
 
 allProducts.addEventListener("click", function () {
@@ -244,10 +211,10 @@ allProducts.addEventListener("click", function () {
   listProducts(products);
 });
 
-womensProducts.addEventListener("click", function () {
+wProducts.addEventListener("click", function () {
   console.log("clicked-allProducts");
   removeBottomBorder(catArray)
-  addBottomBorder([womensProducts])
+  addBottomBorder([wProducts])
   listProducts(womensClothing);
 });
 
@@ -258,13 +225,9 @@ electronicProducts.addEventListener("click", function () {
   listProducts(electronics);
 });
 
-mensProducts.addEventListener("click", function () {
+mProducts.addEventListener("click", function () {
   console.log("clicked-allProducts");
   removeBottomBorder(catArray)
-  addBottomBorder([mensProducts])
+  addBottomBorder([mProducts])
   listProducts(mensClothing);
-});
-
-formSend.addEventListener("click", function () {
-  return alert('Thank you for your feedback!')
 });

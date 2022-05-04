@@ -7,148 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PR.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/07a8df5afa.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
-    <div id="page-container">
-        <div id="content-wrap">
-            <nav id="navCont">
-                <div class="col hidden">
-                    <a href="index.html"><img class="logoPR" src="images/PR-dot-com.png" alt="Initials PR"
-                            height="100px" style="margin-left: 0px;"></a>
-                </div>
-                <div class="col" style="text-align: center;">
-                    <img class="companyName" src="images/Pats-Products.png" alt="Current Page" height="48px">
-                </div>
-                <div class="col-4">
+<div id="page-container">
+    <div id="content-wrap">
 
-                    <div class="col linkList">
-                        <!-- <span class="col-3 links" id="home"><img src="images/home.png" alt="Home" height="21px"></span> -->
-                        <span class="col-4 links" id="products"><img src="images/products.png" alt="Products"
-                                height="21px"></span>
-                        <span class="col-4 links" id="about"><img src="images/about.png" alt="About"
-                                height="21px"></span>
-                        <span class="cartBtn col-4 links dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-bs-toggle="dropdown" aria-expanded="false" id="cart"><img src="images/cart.png"
-                                alt="About" height="21px"><i id="cartVal">1 item</i></span>
-                        <table class="dropdown-menu tg" aria-labelledby="dropdownMenuLink">
-
-                        </table>
-                    </div>
-
-                </div>
-            </nav>
-            <section id="filterCont">
-                <div class="row justify-content-center">
-                    <div class="col-6">
-                        <div id="collapseOne" class="row accordion-collapse text-center collapse"
-                            aria-labelledby="headingOne">
-                            <div class="col-3 mt-2"><span class="categories" id="allProducts">All Products</span></div>
-                            <div class="col-3 mt-2"><span class="categories" id="womensProducts">Women's Clothing</span></div>
-                            <div class="col-3 mt-2"><span class="categories" id="mensProducts">Men's Clothing</span></div>
-                            <div class="col-3 mt-2"><span class="categories" id="electronics">Electronics</span></div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-6 text-center accordian" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                        aria-expanded="false" aria-controls="collapseOne" id="filter"><img class="categories" id="arrow"
-                            data-bs-toggle="collapse accordian-button" aria-expanded="false"
-                            aria-controls="multiCollapseExample1" src="images/arrowBlue.png" alt="arrow" height="21px">
-                    </div>
-
-                </div>
-            </section>
-            <div id="productSection">
+        <div class="row justify-content-center" id="welcomeSection">
+            <div class="col text-center">
+                <h1 style="color: aliceblue; font-size: 300px;">Welcome</h1>
+                <h1 style="color: aliceblue; font-size: 35px;">to</h1>
+                <img class="companyName" src="images/Pats-Products.png" alt="Current Page" height="48px">
+                <br>
+                <a href="products-page/products.html">
+                    <button id="enterBtn"
+                            style="margin-top: 10%; font-size: 50px; width: 30%; background-color: rgb(40, 40, 56);">
+                        Enter
+                    </button>
+                </a>
 
             </div>
-            <div id="aboutSection">
-                <div class="row justify-content-center">
-                    <div class="col-6 aboutCont">
-                        <h1 style="font-size: 100px;">About Us</h1>
-                        <hr style="margin: 25px;">
-                        <h4>Here at Pat's Products our mission is to provide a stress free shopping experience for all of our clients. We accomplish this by curating a short list of twenty products in a variety of categories. By doing this we take away any stress or pressure that consumers normally have when being presented with endless options. We also make it a goal to make every customer's feedback a part of our culture.</h4>
-                        <hr style="margin: 25px;">
-                        <h4>Thank and you being interested in Pat's Products, please leave any of your valuable feedback below and come back and see us!</h4>
-                    </div>
-                  </div>
-                  <div class="row justify-content-center">
-                  <div class="container">
-                  <div class="screen">
-                  <div class="screen-header">
-                  <div class="screen-header-left">
-                  <div class="screen-header-button close"></div>
-                  <div class="screen-header-button maximize"></div>
-                  <div class="screen-header-button minimize"></div>
-                  </div>
-                  <div class="screen-header-right">
-                  <div class="screen-header-ellipsis"></div>
-                  <div class="screen-header-ellipsis"></div>
-                  <div class="screen-header-ellipsis"></div>
-                  </div>
-                  </div>
-                  <div class="screen-body">
-                  <div class="screen-body-item left">
-                  <div class="app-title">
-                  <span>CONTACT</span>
-                  <span>US</span>
-                  </div>
-                  <div class="app-contact">CONTACT INFO : (704) 796-6270</div>
-                  </div>
-                  <div class="screen-body-item">
-                  <div class="app-form">
-                  <div class="app-form-group">
-                  <input class="app-form-control" placeholder="NAME" >
-                  </div>
-                  <div class="app-form-group">
-                  <input class="app-form-control" placeholder="EMAIL">
-                  </div>
-                  <div class="app-form-group">
-                  <input class="app-form-control" placeholder="CONTACT #">
-                  </div>
-                  <div class="app-form-group message">
-                  <input class="app-form-control" placeholder="MESSAGE">
-                  </div>
-                  <div class="app-form-group buttons">
-                  <button class="app-form-button">CANCEL</button>
-                  <button class="app-form-button" id="formSend">SEND</button>
-                  </div>
-                  </div>
-                  </div>
-                  </div>
-                  </div>
-                  
-                  </div>
-                  </div>
-            </div>
-<div class="row justify-content-center" id="welcomeSection">
-    <div class="col text-center">
-<h1 style="color: aliceblue; font-size: 300px;">Welcome</h1>
-<h1 style="color: aliceblue; font-size: 35px;">to</h1>
-<img class="companyName" src="images/Pats-Products.png" alt="Current Page" height="48px">
-<br>
-<button id="enterBtn" style="margin-top: 10%; font-size: 50px; width: 30%; background-color: rgb(40, 40, 56);">Enter</button>
-</div>
-</div>
-            <footer><span id="spanFoot">
+        </div>
+        <footer><span id="spanFoot">
                         <i>
                             <h6>Created by Patrick Rallings for</h6>
                             <h5>CTAC of Carolina Fintech Hub</h5>
                         </i></span>
-                    <a style="margin-right: 3%;" href="index.html"><img class="logoPR" src="images/finalPRLogo.png"
-                            alt="Initials PR" height="45px"></a>
-                    </a>
-                </footer>
-        </div>
+            <a style="margin-right: 3%;" href="index.html"><img class="logoPR" src="images/finalPRLogo.png"
+                                                                alt="Initials PR" height="45px"></a>
+            </a>
+        </footer>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-    <script type="text/JavaScript" src="script.js" charset="utf-8"></script>
+</script>
 </body>
 
 </html>
