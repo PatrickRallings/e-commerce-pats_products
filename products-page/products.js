@@ -12,7 +12,7 @@ const productContainer = document.getElementById("productSection");
 const allLinkArray = [productsBtn, aboutBtn, allProducts, wProducts, mProducts, electronicProducts]
 const catArray = [allProducts, wProducts, mProducts, electronicProducts]
 
-fetch("products.json")
+fetch("./products.json")
   .then(function (response) {
     return response.json();
   })
